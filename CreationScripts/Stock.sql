@@ -1,6 +1,6 @@
+USE ComicStore;
 CREATE TABLE Stock (
-Id INT not null IDENTITY (1,1),
-StockReferenceID INT not null,
+ID INT not null,
 IssueID INT not null,
 Condition VARCHAR (100),
 AvailableQty INT,
@@ -10,9 +10,13 @@ Comments VARCHAR (100)
 
 ALTER TABLE Stock
 add constraint pk_Stock
-primary key (Id)
+primary key (ID)
 
 ALTER TABLE Stock
 ALTER COLUMN Comments VARCHAR (max);
 
 DELETE FROM Stock;
+
+SET IDENTITY_INSERT Stock ON;
+UPDATE Stock SET ID=StockReferenceID
+SET IDENTITY_INSERT Stock OFF;
